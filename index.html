@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Something for you ♡</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        background: linear-gradient(135deg, #fff5f7, #ffe4ec);
+        color: #442c35;
+        overflow-x: hidden;
+    }
+
+    /* ---------- OPENING SCREEN ---------- */
+
+    #opening {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 25px;
+        transition: opacity 0.8s ease;
+    }
+
+    .opening-card {
+        background: rgba(255,255,255,0.72);
+        padding: 50px 30px;
+        border-radius: 28px;
+        width: min(500px, 92vw);
+        box-shadow: 0 15px 50px rgba(130, 50, 80, 0.12);
+        backdrop-filter: blur(8px);
+    }
+
+    .envelope {
+        font-size: 65px;
+        animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+        font-size: 34px;
+        margin: 20px 0 10px;
+    }
+
+    .subtitle {
+        font-family: Arial, sans-serif;
+        color: #8d6574;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    button {
+        border: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        background: #c85a7c;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(200, 90, 124, 0.25);
+        transition: 0.25s;
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+    }
+
+
+    /* ---------- MAIN SURPRISE ---------- */
+
+    #surprise {
+        display: none;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .hero-content {
+        max-width: 700px;
+    }
+
+    .small-text {
+        font-family: Arial, sans-serif;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #b05b76;
+    }
+
+    .hero h2 {
+        font-size: clamp(45px, 8vw, 80px);
+        margin: 15px 0;
+        color: #a83f63;
+    }
+
+    .hero p {
+        font-family: Arial, sans-serif;
+        line-height: 1.8;
+        color: #76525f;
+        font-size: 17px;
+    }
+
+    .heart {
+        font-size: 35px;
+        animation: heartbeat 1.4s infinite;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        15% { transform: scale(1.18); }
+        30% { transform: scale(1); }
+        45% { transform: scale(1.12); }
+    }
+
+
+    /* ---------- LETTER ---------- */
+
+    .letter-section {
+        padding: 80px 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .letter {
+        background: #fffdf9;
+        max-width: 650px;
+        width: 100%;
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 15px 50px rgba(90, 50, 60, 0.12);
+        transform: rotate(-1deg);
+    }
+
+    .letter h3 {
+        font-size: 30px;
+        color: #a83f63;
+    }
+
+    .letter p {
+        font-size: 17px;
+        line-height: 2;
+    }
+
+    .signature {
+        margin-top: 30px;
+        font-style: italic;
+        color: #a83f63;
+    }
+
+
+    /* ---------- FINAL ---------- */
+
+    .final {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .final h2 {
+        font-size: clamp(35px, 7vw, 60px);
+        color: #a83f63;
+    }
+
+    .final p {
+        font-family: Arial, sans-serif;
+        color: #76525f;
+        line-height: 1.8;
+    }
+
+
+    /* ---------- FLOATING HEARTS ---------- */
+
+    .floating-heart {
+        position: fixed;
+        bottom: -30px;
+        pointer-events: none;
+        animation: rise linear forwards;
+        z-index: 100;
+    }
+
+    @keyframes rise {
+        from {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.8;
+        }
+
+        to {
+            transform: translateY(-110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+
+    /* MOBILE */
+
+    @media(max-width: 600px) {
+
+        .opening-card {
+            padding: 40px 22px;
+        }
+
+        .letter {
+            padding: 35px 25px;
+        }
+
+        h1 {
+            font-size: 29px;
+        }
+    }
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- OPENING -->
+
+<section id="opening">
+
+    <div class="opening-card">
+
+        <div class="envelope">💌</div>
+
+        <h1>Hey, I made something for you.</h1>
+
+        <p class="subtitle">
+            Nothing complicated.<br>
+            Just a little reminder that today is about someone special.
+        </p>
+
+        <button onclick="openSurprise()">
+            Open it ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- SURPRISE -->
+
+<main id="surprise">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-text">
+                August 1st
+            </div>
+
+            <h2>
+                Happy National<br>
+                Girlfriend Day ♡
+            </h2>
+
+            <p>
+                Today might just be another date on the calendar,
+                but I thought it was a pretty good excuse to make
+                something just for you.
+            </p>
+
+            <div class="heart">♥</div>
+
+            <p style="margin-top:30px; font-size:14px;">
+                ↓ keep scrolling
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LETTER -->
+
+    <section class="letter-section">
+
+        <div class="letter">
+
+            <h3>Dear You,</h3>
+
+            <p>
+                I don't always know the perfect words to say,
+                so I thought I'd make you a little corner of the
+                internet instead.
+            </p>
+
+            <p>
+                Thank you for the conversations, the laughs,
+                the random moments, and all the memories that
+                make ordinary days feel a little more special.
+            </p>
+
+            <p>
+                I hope today reminds you how appreciated you are,
+                not only because it's National Girlfriend Day,
+                but every other day too.
+            </p>
+
+            <p>
+                And yes, I actually made a whole website for this.
+                You better be impressed.
+            </p>
+
+            <p class="signature">
+                — From someone who thinks you're pretty amazing ♡
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FINAL -->
+
+    <section class="final">
+
+        <div>
+
+            <p class="small-text">
+                One last thing
+            </p>
+
+            <h2>
+                Happy Girlfriend Day ♡
+            </h2>
+
+            <p>
+                Here's to more laughs, more memories,<br>
+                and more moments worth keeping.
+            </p>
+
+            <div class="heart">♥</div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+function openSurprise() {
+
+    const opening = document.getElementById("opening");
+    const surprise = document.getElementById("surprise");
+
+    opening.style.opacity = "0";
+
+    setTimeout(() => {
+
+        opening.style.display = "none";
+
+        surprise.style.display = "block";
+
+        setTimeout(() => {
+            surprise.style.opacity = "1";
+        }, 50);
+
+        createHearts();
+
+    }, 800);
+}
+
+
+/* floating hearts */
+
+function createHearts() {
+
+    setInterval(() => {
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating-heart";
+
+        const hearts = ["♡", "♥", "♡"];
+
+        heart.innerHTML =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 15) + "px";
+
+        heart.style.color =
+            "#d66b8d";
+
+        heart.style.animationDuration =
+            (5 + Math.random() * 4) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 9000);
+
+    }, 800);
+}
+
+</script>
+
+</body>
+</html>
